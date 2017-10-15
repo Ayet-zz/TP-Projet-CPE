@@ -79,20 +79,6 @@ function ContentModel(content){
             }
             var parsed = JSON.parse(data);
             var content = new ContentModel(parsed);
-
-            // if(content.type=='img')
-            // {
-            //     content.src="/content/"+content.id;
-            //     utils.convertBase64(utils.getDataFilePath(content.fileName),function(err,data){
-            //         if(!!err)
-            //         {
-            //             cb(err);
-            //             console.error(err);
-            //             return;
-            //         }
-            //         content.setData(data);
-            //     });
-            // }
             cb(null,content);
             });
 

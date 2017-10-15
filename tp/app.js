@@ -1,4 +1,5 @@
 'use strict';
+// app.js
 var fs=require('fs'); //initialisation fs
 var express=require("express"); //initialisation de js
 var path = require ("path");
@@ -8,23 +9,20 @@ var app=express();
 var defaultRoute = require("./app/routes/default.route.js");
 var contentRoute = require("./app/routes/content.route.js");
 var bodyParser = require('body-parser');
+var IOController = require("./app/controllers/io.controller.js");
 process.env.CONFIG = JSON.stringify(CONFIG);
 var server = http.createServer(app);// Creation du serveur web
 server.listen(CONFIG.port); // listen on config
 
-/*,function(){
-	var host = this.adress().address;
-	var port = this.adress().port;
-	console.log(" Serveur ecoute à l'adresse \""+host+":"+port+"\"");
-})*/
+//socket
+IOController.listen(server);
+
+//Body parser
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-
-/**bodyParser.json(options)
- * Parses the text as JSON and exposes the resulting object on req.body.
- */
 app.use(bodyParser.json());
+
 // Route par défault
 app.use(defaultRoute);
 
@@ -104,8 +102,11 @@ app.use(function(req, res){
     res.setHeader('Content-Type', 'text/plain');
     res.send(404, 'Page introuvable !');
 });
-//socket
-//var IOController = requier("./app/controllers/io.controller.js");
-//var server = 3333;
-//IOController.listen(server);
+
+
+/*,function(){
+	var host = this.adress().address;
+	var port = this.adress().port;
+	console.log(" Serveur ecoute à l'adresse \""+host+":"+port+"\"");
+})*/
 
