@@ -12,7 +12,6 @@ var bodyParser = require('body-parser');
 var IOController = require("./app/controllers/io.controller.js");
 process.env.CONFIG = JSON.stringify(CONFIG);
 var server = http.createServer(app);// Creation du serveur web
-server.listen(CONFIG.port); // listen on config
 
 //socket
 IOController.listen(server);
@@ -32,8 +31,10 @@ app.use(contentRoute);
 
 // Welcome on index.html
 
-app.use("/index.html", express.static(path.join(__dirname, "public")));
-
+//app.use("/index", express.static(path.join(__dirname, "public")));
+// Redirection vers le dossier admin et watch
+app.use("/admin", express.static(path.join(__dirname, "public\\admin\\"))); 
+app.use("/watch", express.static(path.join(__dirname, "public\\watch\\"))); 
 
 //creation de loadpres, lis dans le repertoire les differentes .json, et renvoye et rassemble sous forme d'une map json
 app.use("/loadPres",function(request, response,cb) {
@@ -62,8 +63,7 @@ app.use("/loadPres",function(request, response,cb) {
 					}
 					var parsed = JSON.parse(data);
 					var cle= parsed.id;
-					var valeur=parsed.slidArray;
-					maMap[cle]=valeur;
+					maMap[cle]=parsed;
 					i=i+1;
 					if(longueur==i)
 						{
@@ -98,6 +98,7 @@ app.use("/savePres",function(request, response,cb) {
 
 });
 
+
 app.use(function(req, res){
     res.setHeader('Content-Type', 'text/plain');
     res.send(404, 'Page introuvable !');
@@ -110,3 +111,6 @@ app.use(function(req, res){
 	console.log(" Serveur ecoute à l'adresse \""+host+":"+port+"\"");
 })*/
 
+server.listen(CONFIG.port, function() {
+	console.log("Running...")
+}); // listen on config

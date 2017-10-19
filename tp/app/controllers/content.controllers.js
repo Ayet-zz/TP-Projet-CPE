@@ -14,8 +14,7 @@ function ContentController(){
 }
 
 ContentController.create= function(request,response){
-
-    var content = new contentModel(request.file);
+    var content = new contentModel(request.body);
     content.id = utils.generateUUID();
     if(content.fileName!=null)
         content.fileName=utils.getNewFileName(content.id,request.file.originalname);

@@ -31,6 +31,7 @@ function ContentModel(content){
     ContentModel.create= function(content,cb){
         if(content!=null  && content.id!=null && typeof(content)==typeof(new ContentModel()))
         {
+
             if(content.type=='img')
             {
             fs.writeFile(utils.getDataFilePath(content.fileName),content.getData(),"UTF-8",function(err){

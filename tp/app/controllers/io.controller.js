@@ -12,21 +12,25 @@ process.env.CONFIG = JSON.stringify(CONFIG);
 module.exports = IoController;
 
 function IoController(){
-   var socketMap= new Map();
+
 }
 
 IoController.listen= function(httpServer){
-
-    var io = require('socket.io').listen(httpServer);
-
-    io.sockets.on('connection',function(socket){
+        var socketMap= new Map();
+        var io = require('socket.io')(httpServer);
+        io.on('connection',function(socket){
+        
         socket.emit('connection');
+        
         socket.on('data_comm',function(id)
         {
             socketMap[id]=socket;
         });
-        socket.on('slideEvent',function(json){
-            if(message!=null && message!=undefined)
+        socket.on('disconnect', function() {
+            delete socketMap[socket.id];
+            });
+        socket.on('slidEvent',function(json){
+            if(json!=null && json!=undefined)
             {
                 if(json.CMD!=undefined && json.CMD!="PAUSE")
                 {
@@ -36,9 +40,10 @@ IoController.listen= function(httpServer){
                                 console.error(err);
                                  return err;
                             }
-                           
                     content.src = "/contents/" + content.id;
-                    socket.broadcast.emit('slideEvent',content);
+                    for (var i in socketMap){
+                        socketMap[i].emit('currentSlidEvent',content);
+                    }
                      });
                 } 
             }         
