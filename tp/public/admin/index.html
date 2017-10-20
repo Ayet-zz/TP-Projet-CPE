@@ -19,27 +19,27 @@
                 socket.emit('data_comm',socket.id);
                  });
              function SendSlideStart(){
-                    var json = {"CMD":"START","PRES_ID":"e336147f-e6e1-42a7-9766-e9a9dc34ceef"};
+                    var json = {"CMD":"START","PRES_ID":"efa0a79a-2f20-4e97-b0b7-71f824bfe349"};
                     socket.emit('slidEvent',json);
                 }
                 function SendSlidePause(){
-                    var json = {"CMD":"PAUSE","PRES_ID":"e336147f-e6e1-42a7-9766-e9a9dc34ceef"};
+                    var json = {"CMD":"PAUSE","PRES_ID":""};
                     socket.emit('slidEvent',json);
                 }
                 function SendSlideBegin(){
-                    var json = {"CMD":"BEGIN","PRES_ID":"e336147f-e6e1-42a7-9766-e9a9dc34ceef"};
+                    var json = {"CMD":"BEGIN","PRES_ID":""};
                     socket.emit('slidEvent',json);
                 }
                 function SendSlideNext(){
-                    var json = {"CMD":"NEXT","PRES_ID":"e336147f-e6e1-42a7-9766-e9a9dc34ceef"};
+                    var json = {"CMD":"NEXT","PRES_ID":""};
                     socket.emit('slidEvent',json);
                 }
                 function SendSlidePrev(){
-                    var json = {"CMD":"PREV","PRES_ID":"e336147f-e6e1-42a7-9766-e9a9dc34ceef"};
+                    var json = {"CMD":"PREV","PRES_ID":""};
                     socket.emit('slidEvent',json);
                 }
                 function SendSlideEnd(){
-                    var json = {"CMD":"END","PRES_ID":"e336147f-e6e1-42a7-9766-e9a9dc34ceef"};
+                    var json = {"CMD":"END","PRES_ID":""};
                     socket.emit('slidEvent',json);
                 }  
             </script>
