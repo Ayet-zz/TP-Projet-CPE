@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Watch</title>
+    </head>
+    <body>
+        <button onclick="SendSlideStart()">Start</button>
+        <button onclick="SendSlideEnd()">End</button>
+        <button onclick="SendSlidePause()">Pause</button>
+        <button onclick="SendSlideBegin()">Begin</button>
+        <button onclick="SendSlidePrev()">Prev</button>
+        <button onclick="SendSlideNext()">Next</button>
+
+            <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+            <script>
+                var socket = io();
+                socket.on('connection',function(message){
+                socket.emit('data_comm',socket.id);
+                 });
+             function SendSlideStart(){
+                    var json = {"CMD":"START","PRES_ID":"efa0a79a-2f20-4e97-b0b7-71f824bfe349"};
+                    socket.emit('slidEvent',json);
+                }
+                function SendSlidePause(){
+                    var json = {"CMD":"PAUSE","PRES_ID":""};
+                    socket.emit('slidEvent',json);
+                }
+                function SendSlideBegin(){
+                    var json = {"CMD":"BEGIN","PRES_ID":""};
+                    socket.emit('slidEvent',json);
+                }
+                function SendSlideNext(){
+                    var json = {"CMD":"NEXT","PRES_ID":""};
+                    socket.emit('slidEvent',json);
+                }
+                function SendSlidePrev(){
+                    var json = {"CMD":"PREV","PRES_ID":""};
+                    socket.emit('slidEvent',json);
+                }
+                function SendSlideEnd(){
+                    var json = {"CMD":"END","PRES_ID":""};
+                    socket.emit('slidEvent',json);
+                }  
+            </script>
+
+    </body>
+</html>

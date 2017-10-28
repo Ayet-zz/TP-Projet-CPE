@@ -31,7 +31,7 @@ app.use(contentRoute);
 
 // Welcome on index.html
 
-//app.use("/index", express.static(path.join(__dirname, "public")));
+app.use("/index", express.static(path.join(__dirname, "public")));
 // Redirection vers le dossier admin et watch
 app.use("/admin", express.static(path.join(__dirname, "public\\admin\\"))); 
 app.use("/watch", express.static(path.join(__dirname, "public\\watch\\"))); 
